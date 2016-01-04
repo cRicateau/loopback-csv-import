@@ -1,0 +1,7 @@
+client/bower_components
+client/www
+node_modules
+.idea
+build/temp
+*.log
+tmp

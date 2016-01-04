@@ -1,0 +1,27 @@
+{
+  "name": "FileUploadError",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "line": {
+      "type": "number"
+    },
+    "message": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "fileUpload": {
+      "type": "belongsTo",
+      "model": "FileUpload",
+      "foreignKey": "fileUploadId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

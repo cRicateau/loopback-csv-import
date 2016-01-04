@@ -1,0 +1,31 @@
+{
+  "name": "loopback-csv-import",
+  "version": "0.0.1",
+  "homepage": "",
+  "authors": [
+    "cRicateau"
+  ],
+  "description": "Loopback csv import",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-cookies": "~1.4.3",
+    "angular-loading-bar": "~0.8.0",
+    "angular-moment": "~0.10.2",
+    "angular-resource": "~1.4.3",
+    "angular-translate-interpolation-messageformat": "~2.7.2",
+    "angular-translate-loader-static-files": "~2.7.2",
+    "angular-ui-router": "~0.2.15",
+    "angular-animate": "~1.4.3",
+    "angular-sanitize": "~1.4.3",
+    "angular-bootstrap": "~0.13.3",
+    "ng-file-upload": "~11.0.0",
+    "lodash": "~3.10.1"
+  }
+}

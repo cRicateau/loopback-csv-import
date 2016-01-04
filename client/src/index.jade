@@ -1,0 +1,20 @@
+doctype html
+html(
+  lang="fr",
+  xmlns:ng="http://angularjs.org",
+  id="ng-app",
+  ng-app="app"
+)
+  head
+    meta(charset="utf-8")
+    title Loopback csv import
+    link(href="style/main.css", rel="stylesheet")
+
+  body
+    .view-container.anim-fadeUp
+      .view-frame.container-fluid(ui-view)
+
+    script(src="script/vendor.js")
+    script(src="script/templates.js")
+    script(src="script/services.js")
+    script(src="script/application.js")

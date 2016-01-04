@@ -1,0 +1,11 @@
+{
+  "name": "Start loopack",
+  "script": "server/server.coffee",
+  "watch": ["common", "server"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "out_file": "output.log",
+  "error_file": "error.log",
+  "exec_mode": "fork"
+}

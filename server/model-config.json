@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Container": {
+    "dataSource": "container",
+    "public": true
+  },
+  "FileUpload": {
+    "dataSource": "db",
+    "public": true
+  },
+  "FileUploadError": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Invoice": {
+    "dataSource": "db",
+    "public": true
+  }
+}

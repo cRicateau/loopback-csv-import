@@ -1,0 +1,7 @@
+{
+  "cwd": "client",
+  "directory": "bower_components",
+  "analytics": false,
+  "strict-ssl": false,
+  "registry": "http://bower.herokuapp.com"
+}
