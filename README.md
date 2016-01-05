@@ -1,18 +1,15 @@
 # Loopback csv import example
 ## Requirements
 
-### Ubuntu
+### Requirements
 
-To install nodejs, please follow [these instructions](http://doc.ubuntu-fr.org/nodejs#section012).
-
-### Redhat 7
-
-To install nodejs, please follow [these instructions](https://github.com/joyent/node/wiki/installing-node.js-via-package-manager#enterprise-linux-and-fedora).
+Install nodejs and postgres.
 
 ## Installation
 
     git clone git@github.com:cRicateau/loopback-csv-import.git
-    loopback-csv-import
+
+Set your datasource according to your database.
 
 ## Build
 
