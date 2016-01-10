@@ -6,14 +6,13 @@
   "version": "0.0.1",
   "main": "server/server.coffee",
   "scripts": {
-    "postinstall": "bower install && cd client && gulp",
+    "postinstall": "bower install && npm run client:build && npm run server:watch",
     "preinstall": "mkdir -p tmp",
     "preserver:watch": "rm error-*.log output-*.log; echo 'Removed logs'",
     "server:watch": "pm2 start application.pm2.json && pm2 monit application.pm2.json && pm2 stop application.pm2.json && pm2 delete application.pm2.json",
     "client:build": "cd client; NODE_ENV=build gulp",
     "client:watch": "cd client; NODE_ENV=build gulp watch",
-    "client:clean": "cd client; NODE_ENV=build gulp clean",
-    "theme:fetch": "git submodule init && git submodule update"
+    "client:clean": "cd client; NODE_ENV=build gulp clean"
   },
   "dependencies": {
     "async": "^1.5.1",
