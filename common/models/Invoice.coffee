@@ -156,11 +156,11 @@ module.exports = (Invoice) ->
 
     # Do all the necessary checks to avoid SQL errors and check data integrity
     validate: (line, callback) ->
-      if _.isEmpty line.InvoiceId
+      if line.InvoiceId is ''
         return @rejectLine 'InvoiceId', line.InvoiceId, 'Missing InvoiceId', callback
       if _.isNaN parseInt line.InvoiceId
         return @rejectLine 'InvoiceId', line.InvoiceId, 'InvoiceId in not a number', callback
-      if _.isEmpty line.Amount
+      if line.Amount is ''
         return @rejectLine 'Amount', line.Amount, 'Missing Amount', callback
       if _.isNaN parseInt line.Amount
         return @rejectLine 'Amount', line.Amount, 'Amount in not a number', callback
