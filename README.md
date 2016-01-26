@@ -1,7 +1,8 @@
 # Loopback csv import example
-## Requirements
 
-### Requirements
+Special thanks to [jdrouet](https://github.com/jdrouet)
+
+## Requirements
 
 Install nodejs and postgres.
 
