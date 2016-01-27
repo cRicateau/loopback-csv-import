@@ -53,20 +53,37 @@ module.exports = (Invoice) ->
       callback null, fileContainer
 
   Invoice.import = (container, file, options, callback) ->
+    # Initialize a context object that will hold the transaction
     ctx = {}
+
     # The import_preprocess is used to initialize the sql transaction
     Invoice.import_preprocess ctx, container, file, options, (err) ->
-      Invoice.import_process ctx, container, file, options, (err) ->
-        if err
-          ctx.transaction.rollback (err2) ->
-            Invoice.import_postprocess_error ctx, container, file, options, (err3) ->
-              Invoice.import_clean ctx, container, file, options, (err4) ->
-                callback err
+      Invoice.import_process ctx, container, file, options, (importError) ->
+        if importError
+          # rollback does not apply the transaction
+          async.waterfall [
+            (done) ->
+              ctx.transaction.rollback done
+            (done) ->
+              # Do some other stuff to clean and acknowledge the end of the import
+              Invoice.import_postprocess_error ctx, container, file, options, done
+            (done) ->
+              Invoice.import_clean ctx, container, file, options, done
+          ], ->
+            return callback importError
+
         else
-          ctx.transaction.commit (err) ->
-            Invoice.import_postprocess_success ctx, container, file, options, (err2) ->
-              Invoice.import_clean ctx, container, file, options, (err3) ->
-                callback null
+          async.waterfall [
+            (done) ->
+              # The commit applies the changes to the database
+              ctx.transaction.commit done
+            (done) ->
+               # Do some other stuff to clean and acknowledge the end of the import
+              Invoice.import_postprocess_success ctx, container, file, options, done
+            (done) ->
+              Invoice.import_clean ctx, container, file, options, done
+          ], ->
+            return callback null
 
   Invoice.import_preprocess = (ctx, container, file, options, callback) ->
     Invoice.beginTransaction
