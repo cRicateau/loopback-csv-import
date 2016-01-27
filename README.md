@@ -1,6 +1,10 @@
 # Loopback csv import example
 
-Special thanks to [jdrouet](https://github.com/jdrouet)
+This boilerplate aims to demonstrate on a simple example how to make a transactional csv import using postgreSQL.
+The whole process is described in this [article](http://www.theodo.fr/blog/2016/01/how-to-make-a-user-friendly-and-transactional-csv-import-in-loopback/)
+
+
+To import files directly on the database and other cool stuff on Loopback, check also [jdrouet's github](https://github.com/jdrouet).
 
 ## Requirements
 
