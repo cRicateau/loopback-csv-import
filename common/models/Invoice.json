@@ -3,6 +3,28 @@
   "plural": "invoices",
   "base": "PersistedModel",
   "idInjection": true,
+  "options": {
+    "promisify": true
+  },
+  "mixins": {
+    "Upload": {},
+    "CsvUpload": {
+      "requiredHeaders": [
+        "InvoiceId",
+        "Amount"
+      ],
+      "validators": {
+        "InvoiceId": {
+          "required": true,
+          "type": "integer"
+        },
+        "Amount": {
+          "required": true,
+          "type": "integer"
+        }
+      }
+    }
+  },
   "properties": {
     "id": {
       "type": "number"
