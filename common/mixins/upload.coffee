@@ -104,9 +104,9 @@ module.exports = (Model, options) ->
         return reject err if err
         return resolve()
 
-  Model.import_postprocess_error = (status, ctx, container, file, options) ->
+  Model.import_postprocess = (status, ctx, container, file, options) ->
     return new Promise (resolve, reject) ->
-      debug 'import_postprocess_error', file, options
+      debug 'import_postprocess', status, file, options
       Model.app.models.FileUpload.findById options.fileUpload
       .then (fileUpload) ->
         fileUpload.status = status

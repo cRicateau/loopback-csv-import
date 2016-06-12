@@ -2,13 +2,7 @@ _ = require 'lodash'
 moment = require 'moment'
 Promise = require 'bluebird'
 
-nullValues = ['', undefined, null, 'NULL']
-
-cleanNullValues = (lineField) ->
-  cleanedLineField = if lineField then lineField else null
-  cleanedLineField = if cleanedLineField then cleanedLineField.replace(/\u0000/g, '')
-  cleanedLineField = if cleanedLineField not in ['NULL', 'null'] then cleanedLineField else null
-  return cleanedLineField
+nullValues = ['', undefined, null]
 
 cleanInput = (input) ->
   if input
@@ -62,7 +56,6 @@ validate = (line, validationConfig) ->
 module.exports =
   validate: validate
   validateDate: validateDate
-  cleanNullValues: cleanNullValues
   cleanInput: cleanInput
   getErrorMessage: getErrorMessage
   validateInteger: validateInteger
