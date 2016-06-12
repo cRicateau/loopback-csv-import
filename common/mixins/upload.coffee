@@ -71,10 +71,10 @@ module.exports = (Model, options) ->
     .then ->
       ctx.transaction.commit (err) ->
         Model.import_postprocess_success ctx, container, file, options
-    .then ->
-      Model.import_clean ctx, container, file, options
-    .then ->
-      callback()
+        .then ->
+          Model.import_clean ctx, container, file, options
+        .then ->
+          callback()
     .catch (err) ->
       ctx.transaction.rollback (rollbackError) ->
         console.error(rollbackError) if rollbackError
