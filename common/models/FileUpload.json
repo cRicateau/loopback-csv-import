@@ -3,6 +3,9 @@
   "plural": "file-uploads",
   "base": "PersistedModel",
   "idInjection": true,
+  "options": {
+    "promisify": true
+  },
   "properties": {
     "id": {
       "type": "number"
