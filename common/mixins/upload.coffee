@@ -70,18 +70,23 @@ module.exports = (Model, options) ->
       Model.import_postprocess_hook ctx, container, file, options
     .then ->
       ctx.transaction.commit (err) ->
-        Model.import_postprocess_success ctx, container, file, options
-        .then ->
-          Model.import_clean ctx, container, file, options
-        .then ->
-          callback()
+        Model.exit_safely_after_success ctx, container, file, options, callback
     .catch (err) ->
       ctx.transaction.rollback (rollbackError) ->
         console.error(rollbackError) if rollbackError
-        Model.exit_safely err, ctx, container, file, options, callback
+        Model.exit_safely_after_error err, ctx, container, file, options, callback
 
-  Model.exit_safely = (err, ctx, container, file, options, callback) ->
-    Model.import_postprocess_error ctx, container, file, options
+  Model.exit_safely_after_success = (err, ctx, container, file, options, callback) ->
+    Model.import_postprocess 'SUCCESS', ctx, container, file, options
+    .then ->
+      Model.import_clean ctx, container, file, options
+    .then ->
+      callback()
+    .catch (err) ->
+      callback err
+
+  Model.exit_safely_after_error = (err, ctx, container, file, options, callback) ->
+    Model.import_postprocess 'ERROR', ctx, container, file, options
     .then ->
       Model.import_clean ctx, container, file, options
     .then ->
@@ -99,23 +104,12 @@ module.exports = (Model, options) ->
         return reject err if err
         return resolve()
 
-  Model.import_postprocess_success = (ctx, container, file, options) ->
-    return new Promise (resolve, reject) ->
-      debug 'import_postprocess_success', file, options
-      Model.app.models.FileUpload.findById options.fileUpload
-      .then (fileUpload) ->
-        fileUpload.status = 'SUCCESS'
-        fileUpload.save (err, data) ->
-          resolve(data)
-      .catch (err) ->
-        reject err
-
-  Model.import_postprocess_error = (ctx, container, file, options) ->
+  Model.import_postprocess_error = (status, ctx, container, file, options) ->
     return new Promise (resolve, reject) ->
       debug 'import_postprocess_error', file, options
       Model.app.models.FileUpload.findById options.fileUpload
       .then (fileUpload) ->
-        fileUpload.status = 'ERROR'
+        fileUpload.status = status
         fileUpload.save (err, data) ->
           resolve(data)
       .catch (err) ->
@@ -137,7 +131,6 @@ module.exports = (Model, options) ->
     Model.import_handleLine ctx, line, options
     .catch (err) ->
       if err.status isnt 422
-        console.log 'WOWOWOWWO'
         throw err
       errors.push err
       # The real line number is i + 2 (file header and start line count at 0)
