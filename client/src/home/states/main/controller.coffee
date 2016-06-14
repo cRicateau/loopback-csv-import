@@ -3,7 +3,7 @@ angular.module 'app.home'
   $scope.uploadFile = ->
     UploadService.uploadFile $scope.form.uploadUrl, $scope.form
     .then ->
-      currentCheck = $interval($scope.checkStatus, 1000, 0) unless currentCheck
+      currentCheck = $interval($scope.checkStatus, 2500, 0) unless currentCheck
 
   $scope.form =
       name: 'Invoice'

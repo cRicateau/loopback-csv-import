@@ -14,6 +14,13 @@ Create a database in postgres:
 
     createdb test
 
+
+Install **libicu-dev**:
+
+```sh
+sudo apt-get install libicu-dev
+```
+
 ## Installation
 
     git clone git@github.com:cRicateau/loopback-csv-import.git

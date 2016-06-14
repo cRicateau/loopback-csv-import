@@ -15,6 +15,7 @@ boot app, __dirname, (err) ->
   if err
     throw err
   # start the server if `$ node server.js`
+  require('loopback-promisify') app
   if require.main == module
     app.start()
   return
