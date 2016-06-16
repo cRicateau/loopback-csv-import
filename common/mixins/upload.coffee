@@ -74,9 +74,9 @@ module.exports = (Model, options) ->
     .catch (err) ->
       ctx.transaction.rollback (rollbackError) ->
         console.error(rollbackError) if rollbackError
-        Model.exit_safely_after_error err, ctx, container, file, options, callback
+        Model.exit_safely_after_error ctx, container, file, options, callback
 
-  Model.exit_safely_after_success = (err, ctx, container, file, options, callback) ->
+  Model.exit_safely_after_success = (ctx, container, file, options, callback) ->
     Model.import_postprocess 'SUCCESS', ctx, container, file, options
     .then ->
       Model.import_clean ctx, container, file, options
@@ -85,7 +85,7 @@ module.exports = (Model, options) ->
     .catch (err) ->
       callback err
 
-  Model.exit_safely_after_error = (err, ctx, container, file, options, callback) ->
+  Model.exit_safely_after_error = (ctx, container, file, options, callback) ->
     Model.import_postprocess 'ERROR', ctx, container, file, options
     .then ->
       Model.import_clean ctx, container, file, options
