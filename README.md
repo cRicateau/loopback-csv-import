@@ -8,7 +8,7 @@ To import files directly on the database and other cool stuff on Loopback, check
 
 ## Requirements
 
-Install nodejs and postgres.
+Install nodejs 0.12 and postgres.
 
 Create a database in postgres:
 
@@ -17,8 +17,17 @@ Create a database in postgres:
 
 Install **libicu-dev**:
 
+On Ubuntu:
+
 ```sh
 sudo apt-get install libicu-dev
+```
+
+On MacOS with brew:
+
+```sh
+brew install icu4c
+brew link icu4c --force
 ```
 
 ## Installation
@@ -28,6 +37,8 @@ sudo apt-get install libicu-dev
 Set your datasource according to your database.
 
 ## Build
+
+Start postresSQL then:
 
     npm install
 
