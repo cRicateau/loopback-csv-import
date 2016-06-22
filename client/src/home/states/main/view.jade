@@ -1,31 +1,36 @@
-.container
-  .col-sm-6
-    form(
-      name="{{ form.name }}Form"
-      ng-submit="uploadFile()"
-      novalidate
-    )
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title
-        .panel-body
-          .form-group
-            input.form-control(
-              type="file"
-              name="files"
-              accept=".csv"
-              ngf-select
-              ngf-multiple="false"
-              ng-model="form.files"
-              required
-            )
+.container.panel.panel-default
+  .panel-heading
+    h1 Loopacb csv import example
+  .panel-body
+    .row
+      .col-sm-6
+        form(
+          name="{{ form.name }}Form"
+          ng-submit="uploadFile()"
+          novalidate
+        )
+          .panel.panel-default
+            .panel-heading
+              h3.panel-title
+            .panel-body
+              .form-group
+                input.form-control(
+                  type="file"
+                  name="files"
+                  accept=".csv"
+                  ngf-select
+                  ngf-multiple="false"
+                  ng-model="form.files"
+                  required
+                )
 
-          input.btn.btn-block(
-            type="submit"
-          )
-    p Upload status: {{ lastUpdate.status }}
-    ul(ng-if="lastUpdate.status !== 'PENDING'")
-      li(
-        ng-repeat="error in lastUpdate.errors"
-      ) "{{ error.message }} at line {{ error.line }}"
-
+              input.btn.btn-block(
+                type="submit"
+              )
+    .row
+      p Upload status: {{ lastUpdate.status }}
+      p(ng-if="lastUpdate.status === 'SUCCESS'") FILE SUCCESSFULLY IMPORTED
+      ul(ng-if="lastUpdate.status === 'ERROR'")
+        li(
+          ng-repeat="error in lastUpdate.errors"
+        ) "{{ error.message }} at line {{ error.line }}"
